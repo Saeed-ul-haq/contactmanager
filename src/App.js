@@ -4,10 +4,9 @@ import {
   HashRouter,
   Switch,
   Route,
-  Link
 } from "react-router-dom";
 
-import Contact from './components/contact/Contact';
+
 import Contacts from './components/contact/Contacts';
 import Header from './components/layout/Header';
 import AddContact from './components/contact/AddContact';

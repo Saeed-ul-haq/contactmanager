@@ -2,6 +2,9 @@ import React, { Component } from 'react'
 
 import TextInputGroup from '../layout/TextInputGroup';
 import Axios from 'axios';
+import {connect} from 'react-redux';
+import {ADD_CONTACT} from '..//../store/actions';
+
 
 class AddContact extends Component {
 
@@ -56,11 +59,15 @@ class AddContact extends Component {
             return ;
         }
         const newcontact = {
+            id: new Date(),
             name,
+            email,
+            phone
             
-        }
-        Axios.post('https://jsonplaceholder.typicode.com/users/'  )
-        .then(res => console.log(res));
+        };
+        // Axios.post('https://jsonplaceholder.typicode.com/users/',newcontact  )
+        this.props.AddContact(newcontact);
+        this.props.history.push('/');
         console.log(this.state);
     }
     render() {
@@ -80,5 +87,8 @@ class AddContact extends Component {
         );
     }
 }
+const dispatchStatetoProps = (dispatch) => ({
+AddContact: (data) => dispatch({type: ADD_CONTACT, data: data})
+})
 
-export default AddContact;
+export default connect(null,dispatchStatetoProps)(AddContact);

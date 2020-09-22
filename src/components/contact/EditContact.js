@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 
 import TextInputGroup from '../layout/TextInputGroup';
 import Axios from 'axios';
+import {connect} from 'react-redux';
 
 class EditContact extends Component {
 
@@ -14,7 +15,7 @@ class EditContact extends Component {
 
     componentDidMount =  async () => {
         
-        
+            
         const {id} = this.props.match.params;
 
        const res = await Axios.get('https://jsonplaceholder.typicode.com/users/' + id);
@@ -37,6 +38,7 @@ class EditContact extends Component {
     }
     submitHandler = async (e) => {
         e.preventDefault();
+        const {id} = this.props.match.params;
         const {name,email,phone} = this.state;
 
         if (name === '')
@@ -62,10 +64,18 @@ class EditContact extends Component {
             return ;
         }
 
-        const {id} = this.props.match.params;
-        const res = await Axios.put('https://jsonplaceholder.typicode.com/users/' + id,{name,phone,email});
-    
+        const updatedContact = {
+            
+            name,
+            phone,
+            email
+        };
 
+        
+        // await Axios.put('https://jsonplaceholder.typicode.com/users/' + id,{name,phone,email})
+         this.props.updateContact(id,updatedContact);
+    
+        this.props.history.push('/');
         
     }
     render() {
@@ -86,4 +96,19 @@ class EditContact extends Component {
     }
 }
 
-export default EditContact;
+const mapStateToProps = (state,ownprops) => {
+
+    return {
+        contacts: state.contacts.find(Contact => Contact.id === ownprops.match.params.id)
+    }
+};
+
+const mapDispatchToProps = (dispatch) => {
+
+    return {
+        updateContact: (id,data) => dispatch({type: 'UPDATE_CONTACT', data: data,id: id}),
+
+    }
+};
+
+export default connect(mapStateToProps,mapDispatchToProps)(EditContact);
