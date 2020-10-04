@@ -3,7 +3,9 @@ import React, { Component } from 'react'
 import TextInputGroup from '../layout/TextInputGroup';
 import Axios from 'axios';
 import {connect} from 'react-redux';
-import {ADD_CONTACT} from '..//../store/actions';
+// import {ADD_CONTACT} from '..//../store/actions';
+import {addContact} from '..//../store/actionTypes';
+
 
 
 class AddContact extends Component {
@@ -88,7 +90,7 @@ class AddContact extends Component {
     }
 }
 const dispatchStatetoProps = (dispatch) => ({
-AddContact: (data) => dispatch({type: ADD_CONTACT, data: data})
+AddContact: (data) => dispatch(addContact(data))
 })
 
 export default connect(null,dispatchStatetoProps)(AddContact);
