@@ -65,7 +65,7 @@ class EditContact extends Component {
         }
 
         const updatedContact = {
-            
+            id,
             name,
             phone,
             email

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Contact from './Contact';
 import Axios from 'axios';
 import {connect} from 'react-redux'
+import {getContact,deleteContact} from '../../store/actionTypes'
 
 
  class Contacts extends Component {
@@ -10,11 +11,10 @@ import {connect} from 'react-redux'
         contacts: []
     };
 
-     componentDidMount = async () => {
-      const res = await  Axios.get('https://jsonplaceholder.typicode.com/users');
-        this.setState({
-            contacts: res.data
-        });
+     componentDidMount =  () => {
+         console.log(this.props)
+       this.props.ongetcontact();
+    
         
     }
     
@@ -66,7 +66,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 
     return {
-        OnDeleteContact: (id) => dispatch({type: 'DELETE_CONTACT', id: id}),
+        OnDeleteContact: (id) => dispatch(deleteContact(id)),
+        ongetcontact: () =>   getContact
 
     }
 };
