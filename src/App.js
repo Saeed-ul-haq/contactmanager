@@ -9,6 +9,8 @@ import EditContact from "./components/contact/EditContact";
 import About from "./components/pages/About";
 import NotFound from "./components/pages/NotFound";
 import Form from "./components/Form/form";
+import Laptop from "./components/Laptop/Laptop";
+import Mug from './components/Mug/Mug'
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 
 class App extends Component {
@@ -25,6 +27,9 @@ class App extends Component {
               <Route path="/about" component={About} />
               <Route exact path="/contact/edit/:id" component={EditContact} />
               <Route exact path="/temporary-form" component={Form} />
+              <Route exact path="/laptop-screen" component={Laptop} />
+              <Route exact path="/mug" component={Mug} />
+
               <Route component={NotFound} />
             </Switch>
           </div>
